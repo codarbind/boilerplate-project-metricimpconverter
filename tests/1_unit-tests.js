@@ -17,11 +17,11 @@ suite('Unit Tests', function(){
     })
 
     test('correctly read a fractional input with decimal',function (){
-        assert.equal(convertHandler.getNum('5.1/2gal'),5.5)
+        assert.equal(convertHandler.getNum('5.1/2gal'),2.55)
     })
 
     test('correctly return an error on a double-fraction', function () {
-        assert.throws(() => convertHandler.getNum('5/1/2gal'), Error, 'bad input');
+        assert.throws(() => convertHandler.getNum('5/1/2gal'), Error, 'invalid number');
       });
 
     test('correctly default to a numerical input of 1 when no numerical input is provided',function (){
@@ -41,7 +41,7 @@ suite('Unit Tests', function(){
     })
 
     test('correctly return an error for an invalid input unit', function () {
-        assert.throws(() => convertHandler.getUnit('5/1/2agala'), Error, 'bad unit');
+        assert.throws(() => convertHandler.getUnit('5/1/2agala'), Error, 'invalid unit');
       });
 
       test('return the correct return unit for each valid input unit', function () {
@@ -52,5 +52,19 @@ suite('Unit Tests', function(){
       });
              test('correctly convert mi to km', function () {
         assert.approximately(convertHandler.convert(3.1,'mi'), 4.98895,0.0000000000007);
-      }); 
+      });
+
+      test('correctly convert km to mi', function () {
+        assert.approximately(convertHandler.convert(10,'km'),6.21373 ,0.0000000000007);
+      });
+
+      
+      test('correctly convert lbs to kg', function () {
+        assert.approximately(convertHandler.convert(10,'lbs'), 4.53592,0.0000000000007);
+      });
+
+      test('correctly convert kg to lbs', function () {
+        assert.approximately(convertHandler.convert(1,'kg'), 2.20462,0.0000000000007);
+      });
+
     });

@@ -14,11 +14,13 @@ module.exports = function (app) {
           let initUnit = convertHandler.getUnit(input)
           let returnNum = convertHandler.convert(initNum,initUnit)
           let returnUnit = convertHandler.getReturnUnit(initUnit)
+          let finalinitUnit = initUnit=='l'?'L':initUnit
           let string = convertHandler.getString(initNum,initUnit,returnNum,returnUnit)
-          return res.send({ initNum, initUnit, returnNum, returnUnit, string })
+          console.log({input,initNum, initUnit, returnNum, returnUnit, string})
+          return res.send({ initNum, initUnit:finalinitUnit, returnNum, returnUnit, string })
       }catch(err){
         console.log(err)
-        return res.status(400).send(err)
+        return res.send(err.message)
       }
   })
 
